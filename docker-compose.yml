@@ -1,0 +1,16 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    restart: always
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+        - '5000:5000'
+    volumes:
+      - .:/usr/app
+    environment:
+      NODE_ENV: 'development'
+      MONGO_URI: 'mongodb://mongo/covid-db'
