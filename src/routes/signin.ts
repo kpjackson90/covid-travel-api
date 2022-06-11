@@ -4,11 +4,12 @@ import { User } from "../models/user";
 import jwt from "jsonwebtoken";
 import { validateRequest, BadRequestError } from "../middlewares";
 import { Password } from "../services";
+import { isAuth } from "../middlewares/require-auth";
 
 const router = express.Router();
 
 router.post(
-  "/api/users/signin",
+  "/api/users/signin", isAuth,
   [
     body("email").isEmail().withMessage("Email must be valid"),
     body("password")
